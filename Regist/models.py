@@ -8,6 +8,7 @@ from django.db import models
 class UserInformation(models.Model):
     uid = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
+    password = models.IntegerField(default=0)
     user_name = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
