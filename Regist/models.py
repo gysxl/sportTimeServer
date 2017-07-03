@@ -8,14 +8,20 @@ from django.db import models
 class UserInformation(models.Model):
     uid = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
-    password = models.IntegerField(default=0)
+    password = models.CharField(max_length=200)
     user_name = models.CharField(max_length=200)
+    roles = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+
+ #   def __str__(self):  # __unicode__ on Python 2
+  #      return self.password
 
 
 class PushData(models.Model):
     push_id = models.IntegerField(default=0)
-    uid = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
+    uid = models.CharField(max_length=200)
+    month = models.CharField(max_length=200, default="")
+    date_info = models.CharField(max_length=200, default="")
 
 
 class CouponData(models.Model):

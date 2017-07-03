@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 Django settings for sportTimeServer project.
 
@@ -70,14 +71,37 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sportTimeServer.wsgi.application'
 
+# Database cache
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+        "OPTIONS": {
+            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+        },
+    },
+}
+REDIS_TIMEOUT=7*24*60*60
+CUBES_REDIS_TIMEOUT=60*60
+NEVER_REDIS_TIMEOUT=365*24*60*60
+
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sports',    ## 数据库名称
+        'USER': 'root',
+        'PASSWORD': 'root',    ## 安装 mysql 数据库时，输入的 root 用户的密码
+        'HOST': '127.0.0.1',
     }
 }
 
